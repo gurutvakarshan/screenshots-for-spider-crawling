@@ -8,6 +8,8 @@ class Scrap():
     # See in the config.cfg file for possible values
         listoflink=[]
         domain=[]
+        menubar_links=[]
+        dropdown_links=[]
         config = {
             'use_own_ip': True,
             'keyword': 'security brigade',
@@ -56,8 +58,25 @@ class Scrap():
             for each in iter:
                 find_a = each.find_all("a")
                 for each in find_a:
-                    print(each.get("href"))
-                    
+                    menu_bar_links_level1 = each.get("href")
+                    menubar_links.append(menu_bar_links_level1)
+                    for each in menubar_links:
+                        if each =="/" or each ==" ":
+                            pass
+                        else: 
+                            site_url = Request('http://'+data+each,headers={'User-Agent': 'Mozilla/5.0'})
+                            read_site_url = urlopen(site_url).read()
+                            soup = BeautifulSoup(read_site_url,'lxml')
+                            iter = soup.find_all("ul",{"class":"dropdown-menu"})
+                            for each in iter:
+                                find_a = each.find_all("a")
+                                for each in find_a:
+                                    menu_bar_links_level2 = each.get("href")
+                                    dropdown_links.append(menu_bar_links_level2)
+                                    
+                                    sumof_menubar_links = menubar_links + dropdown_links
+                                    print(set(sumof_menubar_links))          
+                   
 x = Scrap()
 x.ScrapLinksFromBrowser()
-# x.ScrapLinkWithUrllib()
+# x.ScrapLinkWithUrllib()   
