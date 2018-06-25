@@ -2,8 +2,8 @@
 	virtualenv --python python3 env
 	source env/bin/activate
 
-2.) install packages
-	sudo apt-get install python3-lxml python3.5-dev wkhtmltopdf
+2.) install softwares
+	sudo apt-get install python-virtualenv python3-lxml python3.5-dev wkhtmltopdf
 
 3.)Install Chrome, ChromeDriver and Selenium on Ubuntu 16.04 
 	https://gist.github.com/ziadoz/3e8ab7e944d02fe872c3454d17af31a5
